@@ -39,7 +39,7 @@ FacebookCollections._getCollection = function(query,maxItems){
     function handleResponse(error,response){
         if (response && !error){
             _.each(response.data,function(doc){
-               collections.insert(doc); 
+               collection.insert(doc); 
             });
             count += response.data.length;
             if (count<maxItems && response.paging && response.paging.next){

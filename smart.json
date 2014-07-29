@@ -3,7 +3,7 @@
   "description": "Expose the facebook-graph as a set of meteor collections",
   "homepage": "https://github.com/maxkferg/meteor-facebook-collections",
   "author": "Max Ferguson (https://github.com/maxkferg/)",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "git": "https://github.com/maxkferg/meteor-facebook-collections.git",
   "packages": {
   }
