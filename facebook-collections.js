@@ -19,9 +19,9 @@ FacebookCollections._get = function(path,callback){
     }
     // Add accessToken to request
     if (path.indexOf("?")>-1){
-        path = path + "&accessToken="+user.services.facebook.accessToken;
+        path = path + "&access_token="+user.services.facebook.accessToken;
     } else {
-        path = path + "?accessToken="+user.services.facebook.accessToken;
+        path = path + "?access_token="+user.services.facebook.accessToken;
     }
     HTTP.get(path,callback);
 }
