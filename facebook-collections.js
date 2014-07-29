@@ -36,6 +36,7 @@ FacebookCollections = new function() {
         var collection = new Meteor.Collection(null);
         var retries = 0;
         var count = 0;
+        var self = this;
         
         function handleResponse(error,response){
             if (response && !error){
@@ -47,19 +48,19 @@ FacebookCollections = new function() {
                 count += items.length;
                 if (count<maxItems && paging && paging.next){
                     retries = 0;
-                    this._get(paging.next,handleResponse);
+                    self._get(paging.next,handleResponse);
                 }
             } else if (retries<3) {
                 retries+=1;
                 console.log("FB: ",error);
-                this._get(query,handleResponse);
+                self._get(query,handleResponse);
             } else {
                 console.log("FB: Max tries exceeded");
             }
         }
         
         // Start the recursive process
-        this._get(query,handleResponse);
+        self._get(query,handleResponse);
                 
         //Return the (empty) posts collection
         return collection;
