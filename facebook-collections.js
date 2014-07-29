@@ -2,9 +2,11 @@
 
 FacebookCollections = new function() {
     
-     this._get = function(path,callback){
+    this._get = function(query,callback){
         // Manually call the Facebook Graph with correct domain and access_token
         // Throw an error if the user is not authenticated, or doesn't have a facebook username
+        // @query: A path on the facebook graph "/posts?fields=id,source"
+        // @callback: A function to be called like callback(error,response)
         var domain = "https://graph.facebook.com/";
         var user = Meteor.user();
         if (!user){
@@ -15,24 +17,24 @@ FacebookCollections = new function() {
             throw "User does not have an accessToken";    
         }
         // Add the domain to the request 
-        if (path.indexOf(domain)==-1){
-            path = domain + path.strip("/");
+        if (query.indexOf(domain)==-1){
+            query = domain + query.strip("/");
         }
         // Add accessToken to request
-        if (path.indexOf("?")>-1){
-            path = path + "&access_token="+user.services.facebook.accessToken;
+        if (query.indexOf("?")>-1){
+            query = query + "&access_token="+user.services.facebook.accessToken;
         } else {
-            path = path + "?access_token="+user.services.facebook.accessToken;
+            query = query + "?access_token="+user.services.facebook.accessToken;
         }
-        HTTP.get(path,callback);
+        HTTP.get(query,callback);
     };
     
     
     
     this._getCollection = function(query,maxItems){
         // Return a Meteor.Collection object that will be filled with the results of @query
-        // @query will be requested repetitively until there a @maxItems in the collection 
-        // @query: A path on the facebook graph (/posts?fields=id,source)
+        // Request @query repetitively until there a @maxItems in the collection 
+        // @query: A path on the facebook graph like "/posts?fields=id,source"
         var collection = new Meteor.Collection(null);
         var retries = 0;
         var count = 0;
@@ -66,7 +68,24 @@ FacebookCollections = new function() {
         return collection;
     };
 
-
+    
+    
+    this.getCollection = function(path,fields,maxItems){
+        // Wrapper for this._getCollection that handles default values
+        // @path: A path on the facebook graph like "/me/posts/"
+        // @fields(optional): A list of fields to be requested
+        // @maxItems(optional): The maximum number of posts to be added to the collection
+        if (_.isNumber(fields)){
+            maxItems = fields;
+            fields = undefined;
+        } else { 
+            maxItems = maxItems || 500;
+            fields = fields || [];
+        }
+        var limit = Math.max(Math.ceil(maxItems/5),25);
+        var query = path + "?fields="+fields.join(",") + "&limit="+limit;
+        return this._getCollection(query,maxItems);
+    }
     
 
     this.getPosts = function(user,fields,maxItems){
@@ -74,10 +93,7 @@ FacebookCollections = new function() {
         // @username: The page to request post from, can be 'me'
         // @fields: A list of fields to be requested
         // @maxItems: The maximum number of posts to be added to the collection
-        fields = (fields || []).join(",");
-        maxItems = maxItems || 500;
-        var query = user+"/posts?fields="+fields+"&limit=50";
-        return this._getCollection(query,maxItems);
+        return this.getCollection(user+"/posts",fields,maxItems);
     };
 
 
@@ -87,10 +103,7 @@ FacebookCollections = new function() {
         // @username: The user to list post from. Can be 'me'
         // @fields: A list of fields to be requested
         // @maxItems: The maximum number of posts to be added to the collection
-        fields = (fields || []).join(",");
-        maxItems = maxItems || 500;
-        var query = user+"/friends?fields="+fields+"&limit=50";
-        return this._getCollection(query,maxItems);
+        return this.getCollection(user+"/friends",fields,maxItems);
     };
 
 
@@ -100,11 +113,9 @@ FacebookCollections = new function() {
         // @username: The user to list post from. Can be 'me'
         // @fields: A list of fields to be requested
         // @maxItems: The maximum number of posts to be added to the collection
-        fields = (fields || []).join(",");
-        maxItems = maxItems || 500;
-        var query = user+"/photos?fields="+fields+"&limit=50";
-        return this._getCollection(query,maxItems);
+        return this.getCollection(user+"/photos",fields,maxItems);
     };
 }
+
 
 
