@@ -77,7 +77,7 @@ FacebookCollections = new function() {
         // @maxItems(optional): The maximum number of posts to be added to the collection
         if (_.isNumber(fields)){
             maxItems = fields;
-            fields = undefined;
+            fields = [];
         } else { 
             maxItems = maxItems || 500;
             fields = fields || [];
