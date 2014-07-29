@@ -4,7 +4,7 @@ FacebookCollections = {};
 FacebookCollections._get = function(path,callback){
     // Manually call the Facebook Graph with correct domain and access_token
     // Throw an error if the user is not authenticated, or doesn't have a facebook username
-    var domain = "//graph.facebook.com/"
+    var domain = "https://graph.facebook.com/"
     var user = Meteor.user()
     if (!user){
         throw "User is not logged in";
