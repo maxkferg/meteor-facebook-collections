@@ -36,8 +36,8 @@ FacebookCollections._getCollection = function(query,maxItems){
     var retries = 0;
     var count = 0;
     
-    function handleResponse(response){
-        if (response && !response.error){
+    function handleResponse(error,response){
+        if (response && !error){
             _.each(response.data,function(doc){
                collections.insert(doc); 
             });
@@ -48,7 +48,7 @@ FacebookCollections._getCollection = function(query,maxItems){
             }
         } else if (retries<3) {
             retries+=1;
-            console.log("FB: ",response.error);
+            console.log("FB: ",error);
             this._get(query,handleResponse);
         } else {
             console.log("FB: Max tries exceeded");
