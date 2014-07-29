@@ -84,10 +84,14 @@ This makes the collections ideal as a reactive data source.
     }
 ```
 
+Contributers
+------------
+Max Ferguson
+
+
 License
 -------
 
 MIT 
-
 
 
