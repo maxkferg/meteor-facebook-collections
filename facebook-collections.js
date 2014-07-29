@@ -32,7 +32,7 @@ FacebookCollections._getCollection = function(query,maxItems){
     // Return a Meteor.Collection object that will be filled with the results of @query
     // @query will be requested repetitively until there a @maxItems in the collection 
     // @query: A path on the facebook graph (/posts?fields=id,source)
-    var collection = Meteor.Collection(null);
+    var collection = new Meteor.Collection(null);
     var retries = 0;
     var count = 0;
     
