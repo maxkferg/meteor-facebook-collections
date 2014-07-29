@@ -38,13 +38,15 @@ FacebookCollections._getCollection = function(query,maxItems){
     
     function handleResponse(error,response){
         if (response && !error){
-            _.each(response.data,function(doc){
+            var items = response.data.data;
+            var paging = response.data.paging
+            _.each(items, function(doc){
                collection.insert(doc); 
             });
-            count += response.data.length;
-            if (count<maxItems && response.paging && response.paging.next){
+            count += items.length;
+            if (count<maxItems && paging && paging.next){
                 retries = 0;
-                this._get(response.paging.next,handleResponse);
+                this._get(paging.next,handleResponse);
             }
         } else if (retries<3) {
             retries+=1;
