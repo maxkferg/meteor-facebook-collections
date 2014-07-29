@@ -44,12 +44,12 @@ FacebookCollections._getCollection = function(query,maxItems){
             count += response.data.length;
             if (count<maxItems && response.paging && response.paging.next){
                 retries = 0;
-                this.get(response.paging.next,handleResponse);
+                this._get(response.paging.next,handleResponse);
             }
         } else if (retries<3) {
             retries+=1;
             console.log("FB: ",response.error);
-            FB.api(query,handleResponse);
+            this._get(query,handleResponse);
         } else {
             console.log("FB: Max tries exceeded");
         }
