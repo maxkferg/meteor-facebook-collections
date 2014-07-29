@@ -16,16 +16,16 @@ $ mrt add facebook-collections
 Usage
 ---------------
 The FacebookCollections object will be exposed on the client.
-The active user must be associate with a facebook account to use facebook-collections
+The current user must be associated with a facebook account to use facebook-collections.
 Once the user has logged in via the meteor accounts-facebook package, the package can be used.
 
 
 ###.getPosts(user,fields,maxItems)
 
-Return an empty collection that will be filled with Facebook posts
-@username: The page to request post from, can be 'me'
-@fields: A list of fields to be requested
-@maxItems: The maximum number of posts to be added to the collection
+Return an empty collection that will be filled with Facebook posts<br/>
+@user: The page to request post from, can be 'me'<br/>
+@fields: A list of fields to be requested<br/>
+@maxItems: The maximum number of posts to be added to the collection<br/>
     
 ```javascript
 var MyPosts = FacebookCollections.getPosts("me",["type","picture"],300); // --> Meteor.Collection
@@ -56,7 +56,7 @@ MyPosts.observe({
 ###.getPhotos(user,fields,maxItems)
 
 Return an empty collection that will be filled with Facebook photos<br/>
-@username: The page to request post from, can be 'me'<br/>
+@user: The page to request post from, can be 'me'<br/>
 @fields: A list of fields to be requested<br/>
 @maxItems: The maximum number of photos to be added to the collection<br/>
     
@@ -67,13 +67,26 @@ var Photos = FacebookCollections.getPhotos("me",100); // --> Meteor.Collection()
 
 ###.getFriends(user,fields,maxItems)
 
-Return an empty collection that will be filled with Facebook friends
-@username: The page to request post from, can be 'me'<br/>
+Return an empty collection that will be filled with Facebook friends<br/>
+@user: The page to request post from, can be 'me'<br/>
 @fields: A list of fields to be requested<br/>
 @maxItems: The maximum number of friends to be added to the collection<br/>
 
 ```javascript
 var Friends = FacebookCollections.getFriends("me",["id","name"],100); // --> Meteor.Collection
+```
+
+
+###.getCollection(path,fields,maxItems)
+
+Return an empty collection that will be filled with Facebook friends<br/>
+Generic version of the previous functions. Experimental.
+@path: A path on the Facebook graph "/me/albums/" or "/katy/photos/<br/>
+@fields: A list of fields to be requested<br/>
+@maxItems: The maximum number of friends to be added to the collection<br/>
+
+```javascript
+var Albums = FacebookCollections.getFriends("/me/albums/",["id","name"],100);
 ```
 
 
