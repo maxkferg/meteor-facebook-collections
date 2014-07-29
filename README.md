@@ -80,7 +80,7 @@ var Friends = FacebookCollections.getFriends("me",["id","name"],100); // --> Met
 ###.getCollection(path,fields,maxItems)
 
 Return an empty collection that will be filled with Facebook friends<br/>
-Generic version of the previous functions. Experimental.
+Generic version of the previous functions. Experimental.<br/>
 @path: A path on the Facebook graph "/me/albums/" or "/katy/photos/<br/>
 @fields: A list of fields to be requested<br/>
 @maxItems: The maximum number of friends to be added to the collection<br/>
