@@ -8,7 +8,7 @@ Installation
 ------------------
 FacebookCollections can be installed with Meteorite. From inside a Meteorite-managed app:
 ```shell
-$ mrt add facebook-collections
+$ meteor add maxkferg:facebook-collections
 ```
 
 

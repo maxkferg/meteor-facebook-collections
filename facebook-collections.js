@@ -18,7 +18,7 @@ FacebookCollections = new function() {
         }
         // Add the domain to the request 
         if (query.indexOf(domain)==-1){
-            query = domain + query.strip("/");
+            query = domain + this._stripString(query,"/");
         }
         // Add accessToken to request
         if (query.indexOf("?")>-1){
@@ -68,6 +68,15 @@ FacebookCollections = new function() {
         return collection;
     };
 
+
+    this._stripString = function(str,characters){
+        // Remove @characters from the start and end of a string
+        var c_array = characters.split('');
+        var result  = '';
+        for (var i=0; i < characters.length; i++)
+            result += '\\' + c_array[i];
+        return str.replace(new RegExp('^[' + result + ']+|['+ result +']+$', 'g'), '');
+    }
     
     
     this.getCollection = function(path,fields,maxItems){
