@@ -1,7 +1,7 @@
 Package.describe({
     name:"maxkferg:facebook-collections",
     summary: "Expose the facebook-graph as a set of meteor collections",
-    version: "0.2.0",
+    version: "0.8.0",
     git: "https://github.com/maxkferg/meteor-facebook-collections.git"
 });
 
