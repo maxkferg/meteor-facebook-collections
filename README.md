@@ -6,7 +6,7 @@ Expose the facebook-graph on the client as a set of Meteor collections
 
 Installation
 ------------------
-FacebookCollections can be installed with from Atmosphere. From inside any meteor app:
+FacebookCollections can be installed from Atmosphere. From inside any meteor app:
 ```shell
 $ meteor add maxkferg:facebook-collections
 ```
