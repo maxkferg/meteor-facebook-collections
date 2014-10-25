@@ -6,12 +6,16 @@ Expose the facebook-graph on the client as a set of Meteor collections
 
 Installation
 ------------------
-FacebookCollections can be installed with Meteorite. From inside a Meteorite-managed app:
+FacebookCollections can be installed with from Atmosphere. From inside any meteor app:
 ```shell
 $ meteor add maxkferg:facebook-collections
 ```
 
-
+###Requirements
+-Meteor > 0.9.0
+-accounts-facebook with logged in user
+-read_feed scope to access private post ect.
+-user_photos scope to access photos
 
 Usage
 ---------------
