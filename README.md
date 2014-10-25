@@ -14,7 +14,7 @@ $ meteor add maxkferg:facebook-collections
 ###Requirements
 * Meteor > 0.9.0
 * accounts-facebook with logged in user
-* read_feed scope to access private post ect.
+* read_feed scope to access private posts ect.
 * user_photos scope to access photos
 
 Usage
